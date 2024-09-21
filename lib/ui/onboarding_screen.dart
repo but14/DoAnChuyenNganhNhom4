@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wolfbud/constants.dart';
 import 'package:wolfbud/ui/login_page.dart';
+import 'package:wolfbud/ui/root_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -27,7 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             padding: const EdgeInsets.only(right: 20, top: 20),
             child: InkWell(
                 onTap: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const Login()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const RootPage()));
                 }, //login screen
                 child: const Text('Skip',
                     style: TextStyle(
@@ -85,7 +86,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       _pageController.nextPage(duration: const Duration(microseconds: 300), curve:Curves.easeIn);
                     }
                   } else{
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const Login()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const RootPage()));
                   }
                 });
               },
