@@ -1,13 +1,15 @@
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+
 import 'package:page_transition/page_transition.dart';
 import 'package:wolfbud/constants.dart';
 import 'package:wolfbud/models/plants.dart';
+import 'package:wolfbud/ui/scan_page.dart';
 import 'package:wolfbud/ui/screens/cart_page.dart';
 import 'package:wolfbud/ui/screens/favorite_page.dart';
 import 'package:wolfbud/ui/screens/home_page.dart';
 import 'package:wolfbud/ui/screens/profile_page.dart';
-import 'package:wolfbud/ui/screens/scan_page.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -26,8 +28,8 @@ class _RootPageState extends State<RootPage> {
   List<Widget> _widgetOptions(){
     return [
       const HomePage(),
-      //FavoritePage(favoritedPlants: favorites,),
-      //CartPage(addedToCartPlants: myCart,),
+      FavoritePage(favoritedPlants: favorites,),
+      CartPage(addedToCartPlants: myCart,),
       const ProfilePage(),
     ];
   }

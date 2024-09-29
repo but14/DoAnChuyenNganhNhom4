@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:wolfbud/constants.dart';
-import 'package:wolfbud/ui/login_page.dart';
-import 'package:wolfbud/ui/root_page.dart';
+
+import 'screens/signin_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  const OnboardingScreen({Key? key}) : super(key: key);
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -27,15 +25,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 20, top: 20),
             child: InkWell(
-                onTap: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const RootPage()));
-                }, //login screen
-                child: const Text('Skip',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w400,
-                    ))),
+              onTap: () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (_) => const SignIn()));
+              }, //to login screen. We will update later
+              child: const Text(
+                'Skip',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
           )
         ],
       ),
@@ -78,21 +80,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             bottom: 60,
             right: 30,
             child: Container(
-              child: IconButton(onPressed: (){
-                setState(() {
-                  if(currentIndex < 2){
-                    currentIndex++;
-                    if(currentIndex < 3){
-                      _pageController.nextPage(duration: const Duration(microseconds: 300), curve:Curves.easeIn);
-                    }
-                  } else{
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const RootPage()));
-                  }
-                });
-              },
-
-  
-              icon: const Icon(Icons.arrow_forward_ios, size:24, color: Colors.white,)),
+              child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (currentIndex < 2) {
+                        currentIndex++;
+                        if (currentIndex < 3) {
+                          _pageController.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn);
+                        }
+                      } else {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (_) => const SignIn()));
+                      }
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 24,
+                    color: Colors.white,
+                  )),
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -105,8 +113,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-//Create the Indicator decoration widget
+  //Extra Widgets
 
+  //Create the indicator decorations widget
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -120,8 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-//create the indicator list
-
+//Create the indicator list
   List<Widget> _buildIndicator() {
     List<Widget> indicators = [];
 
@@ -132,6 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         indicators.add(_indicator(false));
       }
     }
+
     return indicators;
   }
 }
@@ -142,51 +151,52 @@ class createPage extends StatelessWidget {
   final String description;
 
   const createPage({
-    super.key,
+    Key? key,
     required this.image,
     required this.title,
     required this.description,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.only(left: 50, right: 50, bottom: 80),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 350,
-              child: Image.asset(image),
+      padding: const EdgeInsets.only(left: 50, right: 50, bottom: 80),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 350,
+            child: Image.asset(image),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Constants.primaryColor,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(
-              height: 20,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            description,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+              color: Colors.grey,
             ),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Constants.primaryColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              description,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ));
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
+    );
   }
 }
