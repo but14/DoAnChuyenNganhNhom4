@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:wolfbud/constants.dart';
 
 class CustomTextfield extends StatelessWidget {
+  final TextEditingController controller;
   final IconData icon;
   final bool obscureText;
   final String hintText;
 
   const CustomTextfield({
-    Key? key, required this.icon, required this.obscureText, required this.hintText,
+    Key? key, required this.icon, required this.obscureText, required this.hintText, required this.controller
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       obscureText: obscureText,
       style: TextStyle(
         color: Constants.blackColor,
